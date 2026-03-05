@@ -1,0 +1,194 @@
+[tool.poetry]
+name = "spartan-framework"
+version = "0.1.8"
+description = "A serverless framework for serverless development in AWS and GCP"
+authors = ["Sydel Palinlin <sydel.palinlin@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+annotated-types = ">=0.6.0"
+colorama = "*"
+cryptography = ">=3.3.1"
+greenlet = "!=0.4.17"
+httpx = "0.28.1"
+iniconfig = "*"
+jmespath = ">=1.0.1,<2.0.0"
+pluggy = ">=1.5,<2"
+pydantic-core = "^2.37.2"
+pydantic-settings = "2.10.1"
+pydantic = "^2.11.7"
+python-dateutil = ">=2.1,<3.0.0"
+python-dotenv = ">=0.21.0"
+python-jose = "3.5.0"
+pytz = "2025.2"
+requests = ">=2.5"
+responses = ">=0.13.0"
+typing-extensions = ">=4.6.0"
+werkzeug = ">=0.5,<4.0.0"
+xmltodict = "*"
+email-validator = "^2.0.0"
+google-cloud-logging = { version = "^3.8.0", optional = true }
+opentelemetry-api = { version = "^1.34.0", optional = true }
+opentelemetry-sdk = { version = "^1.34.0", optional = true }
+opentelemetry-exporter-gcp-trace = { version = "^1.7.0", optional = true }
+opentelemetry-instrumentation = { version = "^0.55b0", optional = true }
+opentelemetry-resourcedetector-gcp = { version = "^1.7.0a0", optional = true }
+jinja2 = "^3.1.6"
+boto3 = "^1.42.4"
+cloudevents = "^1.12.0"
+functions-framework = "^3.10.0"
+google-cloud-tasks = "^2.16.4"
+google-cloud-secret-manager = "^2.20.0"
+google-cloud-parametermanager = "^0.1.0"
+black = "^25.12.0"
+autopep8 = "^2.3.2"
+google-cloud = "^0.34.0"
+
+[tool.poetry.extras]
+gcloud = [
+    "google-cloud-logging",
+    "opentelemetry-api",
+    "opentelemetry-sdk",
+    "opentelemetry-exporter-gcp-trace",
+    "opentelemetry-instrumentation",
+    "opentelemetry-resourcedetector-gcp",
+]
+
+[tool.poetry.group.dev.dependencies]
+python-dotenv = "^1.2.1"
+google-api-core = "^2.28.1"
+google-auth = "^2.43.0"
+google-cloud-appengine-logging = "^1.7.0"
+google-cloud-audit-log = "^0.4.0"
+google-cloud-core = "^2.5.0"
+google-cloud-trace = "^1.17.0"
+googleapis-common-protos = "^1.72.0"
+grpc-google-iam-v1 = "^0.14.3"
+grpcio-status = "^1.76.0"
+grpcio = "^1.76.0"
+proto-plus = "^1.26.1"
+protobuf = "^6.33.2"
+pyasn1-modules = "^0.4.2"
+pyasn1 = "^0.6.1"
+s3transfer = "^0.16.0"
+six = "^1.17.0"
+wrapt = "^1.17.3"
+Mako = "*"
+packaging = "*"
+poetry-plugin-export = "^1.9.0"
+rich = "^14.1.0"
+autoflake = "^2.2.1"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+black = "^25.1.0"
+isort = "^6.0.1"
+flake8 = "^7.3.0"
+bandit = "^1.7.5"
+pytest-mock = "^3.14.1"
+pytest-asyncio = "^1.1.0"
+faker = "^37.12.0"
+hypothesis = "^6.100.0"
+mocker = "^1.1.1"
+tox = "^4.11.0"
+mypy = "^1.5.0"
+types-requests = "^2.31.0"
+types-python-dateutil = "^2.8.0"
+typer = "^0.16.0"
+google-cloud = "^0.34.0"
+google-cloud-bigquery = "^3.39.0"
+google-cloud-storage = "^3.7.0"
+google-cloud-logging = "^3.13.0"
+pytest-xdist = "^3.8.0"
+
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | \.serverless
+  | \.vscode
+)/
+'''
+
+[tool.autopep8]
+max-line-length = 88
+exclude = [
+    "app/exceptions/__init__.py",
+    ".git",
+    "build",
+    "dist",
+    ".venv",
+    ".serverless",
+    "node_modules",
+    ".vscode",
+    ".pytest_cache",
+    "__pycache__",
+]
+
+[tool.autoflake]
+remove-all-unused-imports = true
+remove-unused-variables = true
+recursive = true
+in-place = true
+exclude = [
+    "app/exceptions/__init__.py",
+    ".git",
+    "build",
+    "dist",
+    ".venv",
+    ".serverless",
+    "node_modules",
+    ".vscode",
+    ".pytest_cache",
+    "__pycache__",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+lines_after_imports = 2
+skip = [
+    "app/exceptions/__init__.py",
+    ".git",
+    "build",
+    "dist",
+    ".venv",
+    ".serverless",
+    "node_modules",
+    ".vscode",
+    ".pytest_cache",
+    "__pycache__",
+    ".tox",
+    ".vscode",
+    "htmlcov",
+    "coverage.xml",
+    ".mypy_cache",
+    ".pytest_cache",
+]
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = ["tests", "integration"]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
