@@ -154,3 +154,34 @@ def test_handlers_singleton_behavior(monkeypatch):
     assert h1 is h2
     # get_handler should return None for unknown types
     assert h1.get_handler("unknown") is None
+
+
+def test_storage_settings_class(monkeypatch):
+    """Test StorageSettings class from config.storage."""
+    mapping = {
+        "STORAGE_TYPE": "gcs",
+        "STORAGE_BUCKET": "test-bucket",
+        "STORAGE_PATH": "test/path",
+    }
+    monkeypatch.setattr("app.helpers.environment.env", make_env(mapping))
+
+    # Import and instantiate StorageSettings
+    storage_mod = importlib.reload(importlib.import_module("config.storage"))
+    settings = storage_mod.StorageSettings()
+
+    assert settings.storage_type == "gcs"
+    assert settings.storage_bucket == "test-bucket"
+    assert settings.storage_path == "test/path"
+
+
+def test_storage_settings_defaults(monkeypatch):
+    """Test StorageSettings with default values."""
+    mapping = {}
+    monkeypatch.setattr("app.helpers.environment.env", make_env(mapping))
+
+    storage_mod = importlib.reload(importlib.import_module("config.storage"))
+    settings = storage_mod.StorageSettings()
+
+    assert settings.storage_type == "local"
+    assert settings.storage_bucket == "spartan-bucket"
+    assert settings.storage_path == "storage/core"
